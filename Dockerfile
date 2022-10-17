@@ -21,8 +21,8 @@ RUN ./venv/bin/pip install . \
 
 FROM python:3.8.14-slim-bullseye
 
-ARG with_models=false
-ARG models=
+ARG with_models=true
+ARG models=en,sv
 
 RUN addgroup --system --gid 1032 libretranslate && adduser --system --uid 1032 libretranslate
 RUN apt-get update -qq && apt-get -qqq install --no-install-recommends -y libicu67 && apt-get clean && rm -rf /var/lib/apt
@@ -40,5 +40,7 @@ RUN if [ "$with_models" = "true" ]; then  \
   fi \
   fi
 
-EXPOSE 5000
-ENTRYPOINT [ "./venv/bin/libretranslate", "--host", "0.0.0.0" ]
+
+
+#EXPOSE 5000
+#ENTRYPOINT [ "./venv/bin/libretranslate", "--host", "0.0.0.0" ]
