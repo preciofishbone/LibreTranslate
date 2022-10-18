@@ -26,7 +26,8 @@ ARG models=en,sv
 
 RUN addgroup --system --gid 1032 libretranslate && adduser --system --uid 1032 libretranslate
 RUN apt-get update -qq && apt-get -qqq install --no-install-recommends -y libicu67 && apt-get clean && rm -rf /var/lib/apt
-USER libretranslate
+
+#USER libretranslate
 
 COPY --from=builder --chown=1032:1032 /app /app
 WORKDIR /app
@@ -41,6 +42,30 @@ RUN if [ "$with_models" = "true" ]; then  \
   fi
 
 
+# Install .net runtime
 
+#USER root
+
+RUN apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  curl \
+  ca-certificates \
+  \
+  # .NET dependencies
+  libc6 \
+  libgcc1 \
+  libgssapi-krb5-2 \
+  libssl1.1 \
+  libstdc++6 \
+  zlib1g \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.0-rc.1.22427.2 --runtime aspnetcore -InstallDir /usr/share/dotnet \
+  && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+
+RUN dotnet --info
+
+#USER libretranslate
 #EXPOSE 5000
 #ENTRYPOINT [ "./venv/bin/libretranslate", "--host", "0.0.0.0" ]

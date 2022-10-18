@@ -1,1 +1,1 @@
-docker build . -t preciofishbone/omniacloud:7.0-preview1-translator
+docker build . -t preciofishbone/omniacloud:7.0-preview1-libre
