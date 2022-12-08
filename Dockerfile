@@ -60,7 +60,7 @@ RUN apt-get update \
   zlib1g \
   && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.0-rc.1.22427.2 --runtime aspnetcore -InstallDir /usr/share/dotnet \
+RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.0 --runtime aspnetcore -InstallDir /usr/share/dotnet \
   && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
 
