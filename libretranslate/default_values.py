@@ -138,7 +138,7 @@ _default_options_objects = [
     },
     {
         'name': 'THREADS',
-        'default_value': 4,
+        'default_value': 8,
         'value_type': 'int'
     },
     {
