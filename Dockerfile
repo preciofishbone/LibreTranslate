@@ -66,6 +66,12 @@ RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7
 
 RUN dotnet --info
 
+# RUN ln -s /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/libdl.so
+# RUN ln -s /lib/x86_64-linux-gnu/libdl.so.2 /usr/lib/x86_64-linux-gnu/libdl.so
+
+#Set environment variable
+# ENV PYTHONNET_PYDLL=/usr/local/bin/python
+
 #USER libretranslate
 #EXPOSE 5000
 #ENTRYPOINT [ "./venv/bin/libretranslate", "--host", "0.0.0.0" ]
